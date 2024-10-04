@@ -16,7 +16,7 @@ class Img {
     @Column('int', { default: 0 })
     img_view;
 
-    @Column('date', { default: () => 'CURRENT_TIMESTAMP' }) 
+    @Column('vachar', { length: 30 }) 
     img_date;
 
     @Column('varchar', { length: 300 })
