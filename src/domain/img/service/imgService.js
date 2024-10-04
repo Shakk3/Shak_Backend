@@ -45,3 +45,25 @@ async function getRandomImage() {
 
     return null;
 }
+
+async function addEmotion(img_id, emotion_type) {
+    const emotion = await Emotion.findOne({ where: { img_id } });
+    if (!emotion) {
+        throw new Error('Emotion Information Not Found Error');
+    }
+
+    if (emotion_type === 'angry') {
+        emotion.emotion_angry += 1;
+    } else if (emotion_type === 'new') {
+        emotion.emotion_new += 1;
+    } else if (emotion_type === 'love') {
+        emotion.emotion_love += 1;
+    } else if (emotion_type === 'crazy') {
+        emotion.emotion_crazy += 1;
+    } else {
+        throw new Error('Emotion Not Found Error');
+    }
+
+    await emotion.save();
+    return emotion;
+}
