@@ -67,3 +67,25 @@ async function addEmotion(img_id, emotion_type) {
     await emotion.save();
     return emotion;
 }
+
+async function addComment(img_id, comment_name, comment_content) {
+    const img = await Img.findOne({where:{img_id}});
+    if(!img) {
+        throw new Error('Image Not Found Error');
+    }
+
+    const newComment = new Comment;
+    newComment.img = img;
+    newComment.comment_name = comment_name;
+    newComment.comment_content = comment_content;
+
+    await newComment.save();
+    return newComment;
+}
+
+module.exports = {
+    uploadImage,
+    getRandomImage,
+    addEmotion,  
+    addComment,  
+};
