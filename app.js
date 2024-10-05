@@ -1,9 +1,12 @@
+const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const imageRoutes = require('./routes/imgRouter');
 const sequelize = require('./config/database');
 
 const app = express();
+
+app.use(cors());
 
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));

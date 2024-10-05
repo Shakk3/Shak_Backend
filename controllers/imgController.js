@@ -6,10 +6,14 @@ exports.uploadImage = async (req, res) => {
   try {
     const { img_data, img_name, img_reference } = req.body;
 
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}.${(currentDate.getMonth() + 1).toString()}.${currentDate.getDate().toString()}`;
+
     const newImage = await Img.create({
       img_data,  
       img_name,
       img_reference,
+      img_date: formattedDate,
       img_view: 0
     });
 
@@ -32,6 +36,9 @@ exports.getRandomImage = async (req, res) => {
     const images = await Img.findAll();
     const randomImage = images[Math.floor(Math.random() * images.length)];
 
+    randomImage.img_view += 1;
+    await randomImage.save();
+    
     const emotions = await ImgEmotion.findOne({ where: { img_id: randomImage.img_id } });
     const comments = await ImgComment.findAll({ where: { img_id: randomImage.img_id } });
 

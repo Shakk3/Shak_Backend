@@ -8,7 +8,7 @@ const Img = sequelize.define('img_tbl', {
     primaryKey: true
   },
   img_data: {
-    type: DataTypes.LONGTEXT, 
+    type: DataTypes.TEXT('long'), 
     allowNull: false
   },
   img_name: {
@@ -20,7 +20,7 @@ const Img = sequelize.define('img_tbl', {
     defaultValue: 0
   },
   img_date: {
-    type: DataTypes.DATE,
+    type: DataTypes.STRING(20),
     defaultValue: DataTypes.NOW
   },
   img_reference: {
